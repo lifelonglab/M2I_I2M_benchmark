@@ -1,18 +1,16 @@
 from dataclasses import dataclass
 from typing import Sequence, Union
 
-from avalanche.benchmarks import nc_benchmark, SplitMNIST, NCScenario, SplitTinyImageNet, PermutedMNIST
+from avalanche.benchmarks import nc_benchmark
 from avalanche.benchmarks.utils import SupportedDataset
-from torchvision.transforms import ToTensor, Compose
 
-from scenarios.datasets.cifar import load_cifar10, load_resized_cifar10
-from scenarios.datasets.cub import load_resized_cube200, load_cube200
-from scenarios.datasets.emnist_datasets import load_emnist, load_emnist_with_resize
+from scenarios.datasets.cifar import load_resized_cifar10
+from scenarios.datasets.emnist_datasets import load_emnist
 from scenarios.datasets.fashion_mnist import load_fashion_mnist_with_resize
-from scenarios.datasets.kmnist import load_kmnist, load_kmnist_with_resize
+from scenarios.datasets.kmnist import load_kmnist
 from scenarios.datasets.load_imagenet import load_imagenet
 from scenarios.datasets.mnist import load_mnist, load_mnist_with_resize
-from scenarios.datasets.omniglot import load_omniglot, load_resized_omniglot
+from scenarios.datasets.omniglot import load_resized_omniglot
 from scenarios.datasets.svhn import load_svhn_resized
 from scenarios.utils import separate_into_tasks, filter_classes
 
