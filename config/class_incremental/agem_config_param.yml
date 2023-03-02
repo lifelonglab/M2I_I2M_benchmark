@@ -1,5 +1,5 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: AGEM
 patterns_per_exp: 256
 minibatch_size:  128
 
@@ -8,6 +8,7 @@ model_name: wide_VGG9
 num_classes: 250
 lr: 0.001
 hs: 250
+momentum: 0.9
 epochs: 50
 
 #scenario params

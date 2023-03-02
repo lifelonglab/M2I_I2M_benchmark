@@ -1,17 +1,18 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: GEM
 patterns_per_exp: 256
 minibatch_size:  128
 
 #model and training params
-model_name: wide_VGG9
-num_classes: 250
+model_name: EfficientNet
+num_classes: 10
 lr: 0.001
+momentum: 0.9
 hs: 250
 epochs: 50
 
 #scenario params
-scenario: imagenet_to_mnist_long
+scenario: simple_mnist
 num_class_from_imagenet: 200
 num_experiences: 5
 scenario_type: class_incremental

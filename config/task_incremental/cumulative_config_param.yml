@@ -4,20 +4,20 @@ patterns_per_exp: 256
 minibatch_size:  128
 
 #model and training params
-model_name: EfficientNet
-num_classes: 200
+model_name: EfficientNet_NotPretrained
+num_classes: 60
 lr: 0.001
 momentum: 0.9
 hs: 250
-epochs: 70
+epochs: 50
 
 #scenario params
-scenario: imagenet
-resized: not
-balanced: not
+scenario: short_imagenet_cifar10_svhn_fmnist_omniglot_mnist
+resized: resized
+balanced: balanced
 number_of_samples_per_class: 500
 scenario_type: task_incremental
 
 
 num_class_from_imagenet: 10
-num_experiences: 40
+num_experiences: 5

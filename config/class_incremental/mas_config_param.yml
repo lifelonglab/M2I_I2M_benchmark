@@ -1,7 +1,9 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: MAS
 patterns_per_exp: 256
 minibatch_size:  128
+mas_lambda_reg: 1
+alpha: 0.5
 
 #model and training params
 model_name: wide_VGG9

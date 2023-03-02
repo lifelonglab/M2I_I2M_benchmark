@@ -2,24 +2,19 @@
 strategy_name: LwF
 patterns_per_exp: 256
 minibatch_size:  128
-lwf_alpha: [2]
+lwf_alpha: [0.1, 0.5, 1.333, 2.25, 3.2]
 
 
 softmax_temperature: 1
 #model and training params
 model_name: wide_VGG9
-num_classes: 200
+num_classes: 250
 lr: 0.001
 hs: 250
-epochs: 20
+epochs: 50
 
 #scenario params
-scenario: split_imagenet
-resized: not
-balanced: not
-number_of_samples_per_class: 500
-scenario_type: task_incremental
-
-
-num_class_from_imagenet: 10
-num_experiences: 40
+scenario: imagenet_to_mnist_long
+num_class_from_imagenet: 200
+num_experiences: 5
+scenario_type: class_incremental

@@ -24,10 +24,10 @@ transform_with_resize = Compose([
 def _load_omniglot(transform_func, balanced: bool = False, number_of_samples_per_class=None):
     dataset = Omniglot(root=f'{DATA_PATH}/data', download=True, train=True)
     X_train, X_test, y_train, y_test = train_test_split(dataset.data, dataset.targets, train_size=0.8, test_size=0.2)
-    train = load_dataset(lambda transform: make_tensor_classification_dataset(X_train, y_train, transform=transform),
+    train = load_dataset(lambda transform: AvalancheTensorDataset(X_train, y_train, transform=transform),
                          transform=transform_func, balanced=balanced,
                          number_of_samples_per_class=number_of_samples_per_class)
-    test = load_dataset(lambda transform: make_tensor_classification_dataset(X_test, y_test, transform=transform),
+    test = load_dataset(lambda transform: AvalancheTensorDataset(X_test, y_test, transform=transform),
                         transform=transform_func, balanced=balanced,
                         number_of_samples_per_class=number_of_samples_per_class)
     return train, test

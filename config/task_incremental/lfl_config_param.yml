@@ -1,9 +1,8 @@
 #stategy params
-strategy_name: SI
+strategy_name: LFL
 patterns_per_exp: 256
 minibatch_size:  128
-si_lambda: 1
-si_eps: 0.001
+lfl_lambda: 1
 
 #model and training params
 model_name: EfficientNet_NotPretrained

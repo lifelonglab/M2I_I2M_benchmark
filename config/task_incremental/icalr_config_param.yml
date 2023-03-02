@@ -1,19 +1,20 @@
 #stategy params
-strategy_name: SI
+strategy_name: ICaRL
 patterns_per_exp: 256
 minibatch_size:  128
-si_lambda: 1
-si_eps: 0.001
+icarl_mem_size: 200
 
+softmax_temperature: 1
 #model and training params
 model_name: EfficientNet_NotPretrained
 num_classes: 60
 lr: 0.001
+momentum: 0.9
 hs: 250
 epochs: 50
 
 #scenario params
-scenario: short_imagenet_cifar10_svhn_fmnist_omniglot_mnist
+scenario: short_mnist_omniglot_fmnist_svhn_cifar10_imagenet
 resized: resized
 balanced: balanced
 number_of_samples_per_class: 500

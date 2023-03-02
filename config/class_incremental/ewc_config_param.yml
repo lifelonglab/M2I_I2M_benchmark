@@ -1,7 +1,8 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: EWC
 patterns_per_exp: 256
 minibatch_size:  128
+ewc_lambda: 1
 
 #model and training params
 model_name: wide_VGG9

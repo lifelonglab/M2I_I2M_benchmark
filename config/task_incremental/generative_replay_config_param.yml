@@ -1,14 +1,13 @@
 #stategy params
-strategy_name: SI
+strategy_name: GenerativeReplay
 patterns_per_exp: 256
 minibatch_size:  128
-si_lambda: 1
-si_eps: 0.001
 
 #model and training params
 model_name: EfficientNet_NotPretrained
 num_classes: 60
 lr: 0.001
+momentum: 0.9
 hs: 250
 epochs: 50
 

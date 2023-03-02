@@ -1,5 +1,5 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: GDumb
 patterns_per_exp: 256
 minibatch_size:  128
 

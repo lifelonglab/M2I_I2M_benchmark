@@ -1,7 +1,8 @@
 #stategy params
-strategy_name: CWRStar
+strategy_name: LFL
 patterns_per_exp: 256
 minibatch_size:  128
+lfl_lambda: 1
 
 #model and training params
 model_name: wide_VGG9
