@@ -1,0 +1,24 @@
+#stategy params
+strategy_name: SI
+patterns_per_exp: 256
+minibatch_size:  128
+si_lambda: 1
+si_eps: 0.001
+
+#model and training params
+model_name: wide_VGG9
+num_classes: 200
+lr: 0.001
+hs: 250
+epochs: 50
+
+#scenario params
+scenario: split_imagenet
+resized: resized
+balanced: not
+number_of_samples_per_class: 500
+scenario_type: task_incremental
+
+
+num_class_from_imagenet: 10
+num_experiences: 40
