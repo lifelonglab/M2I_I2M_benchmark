@@ -1,5 +1,3 @@
-#M2I_I2M_benchmark
-
 RUN project with python
 
 Place yourself into the project root folder and run follow command with specyfied yml configuration file: 
