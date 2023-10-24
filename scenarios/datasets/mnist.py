@@ -1,37 +1,33 @@
 from avalanche.benchmarks.datasets import MNIST
-from avalanche.benchmarks.classic import PermutedMNIST
 from torchvision.transforms import Compose, RandomCrop, ToTensor, Normalize, Resize
 
 from paths import DATA_PATH
-from scenarios.utils import transform_from_gray_to_rgb, balance_dataset, load_dataset
+from scenarios.utils import balance_dataset, load_dataset, transform_from_gray_to_rgb
 
 train_transform = Compose([
-    RandomCrop(28, padding=4),
+    RandomCrop(32, padding=4),
     ToTensor(),
-    transform_from_gray_to_rgb(),
-    Normalize((0.1307,), (0.3081,))
+    Normalize(mean=(0.9221,), std=(0.2681,))
 ])
 
 test_transform = Compose([
     ToTensor(),
-    transform_from_gray_to_rgb(),
-    Normalize((0.1307,), (0.3081,))
+    Normalize(mean=(0.9221,), std=(0.2681,))
 ])
 
 train_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     transform_from_gray_to_rgb(),
     Normalize((0.1307,), (0.3081,))
 ])
 
 test_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     transform_from_gray_to_rgb(),
     Normalize((0.1307,), (0.3081,))
 ])
-
 
 def load_mnist(balanced=True, number_of_samples_per_class=None):
     if not balanced:

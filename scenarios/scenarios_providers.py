@@ -5,9 +5,7 @@ from avalanche.benchmarks import nc_benchmark
 from avalanche.benchmarks.utils import SupportedDataset
 
 from scenarios.datasets.cifar import load_resized_cifar10
-from scenarios.datasets.emnist_datasets import load_emnist
 from scenarios.datasets.fashion_mnist import load_fashion_mnist_with_resize
-from scenarios.datasets.kmnist import load_kmnist
 from scenarios.datasets.load_imagenet import load_imagenet
 from scenarios.datasets.mnist import load_mnist, load_mnist_with_resize
 from scenarios.datasets.omniglot import load_resized_omniglot

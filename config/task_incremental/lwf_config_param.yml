@@ -7,7 +7,7 @@ lwf_alpha: [2]
 
 softmax_temperature: 1
 #model and training params
-model_name: wide_VGG9
+model_name: ResNet
 num_classes: 60
 lr: 0.001
 hs: 250

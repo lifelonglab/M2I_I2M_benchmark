@@ -2,6 +2,7 @@
 strategy_name: GenerativeReplay
 patterns_per_exp: 256
 minibatch_size:  128
+replay_mem_size: 200
 
 #model and training params
 model_name: EfficientNet_NotPretrained
@@ -12,7 +13,7 @@ hs: 250
 epochs: 50
 
 #scenario params
-scenario: short_imagenet_cifar10_svhn_fmnist_omniglot_mnist
+scenario: short_mnist_omniglot_fmnist_svhn_cifar10_imagenet
 resized: resized
 balanced: balanced
 number_of_samples_per_class: 500

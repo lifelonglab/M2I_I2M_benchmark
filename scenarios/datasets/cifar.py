@@ -17,13 +17,13 @@ test_transform = Compose([
 
 train_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     Normalize(mean=(0.9221,), std=(0.2681,))
 ])
 
 test_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     Normalize(mean=(0.9221,), std=(0.2681,))
 ])
 
