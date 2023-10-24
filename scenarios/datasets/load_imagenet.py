@@ -1,31 +1,13 @@
 from avalanche.benchmarks.datasets import TinyImagenet
-from torchvision.transforms import Resize, Compose, Grayscale, ToTensor
+from torchvision.transforms import Resize, Compose, ToTensor
 
 from paths import DATA_PATH
 from scenarios.utils import load_dataset
 
 
-def load_greyscaled_resized_imagenet():
-    train = TinyImagenet(root=f'{DATA_PATH}/data', train=True,
-                         transform=Compose([ToTensor(), Resize((28, 28)), Grayscale()]))
-    test = TinyImagenet(root=f'{DATA_PATH}/data', train=False,
-                        transform=Compose([ToTensor(), Resize((28, 28)), Grayscale()]))
-
-    return train, test
-
-
-def load_greyscaled_imagenet():
-    train = TinyImagenet(root=f'{DATA_PATH}/data', train=True,
-                         transform=Compose([ToTensor(), Grayscale()]))
-    test = TinyImagenet(root=f'{DATA_PATH}/data', train=False,
-                        transform=Compose([ToTensor(), Grayscale()]))
-
-    return train, test
-
-
 def load_resized_imagenet():
-    train = TinyImagenet(root=f'{DATA_PATH}/data', train=True, transform=Compose([ToTensor(), Resize((28, 28))]))
-    test = TinyImagenet(root=f'{DATA_PATH}/data', train=False, transform=Compose([ToTensor(), Resize((28, 28))]))
+    train = TinyImagenet(root=f'{DATA_PATH}/data', train=True, transform=Compose([ToTensor(), Resize((64, 64))]))
+    test = TinyImagenet(root=f'{DATA_PATH}/data', train=False, transform=Compose([ToTensor(), Resize((64, 64))]))
 
     return train, test
 
@@ -39,9 +21,3 @@ def load_imagenet(balanced=False, number_of_samples_per_class=None):
                         number_of_samples_per_class=number_of_samples_per_class)
 
     return train, test
-
-
-if __name__ == '__main__':
-    train, test = load_imagenet()
-    # test, _ = load_greyscaled_resized_imagenet()
-    print(set(test.targets))

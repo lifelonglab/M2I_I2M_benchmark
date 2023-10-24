@@ -2,9 +2,7 @@ import math
 from collections import defaultdict
 from typing import List, Tuple, Callable, Optional
 
-import avalanche
-import torch
-from avalanche.benchmarks.utils import AvalancheDataset, make_tensor_classification_dataset
+from avalanche.benchmarks.utils import AvalancheDataset, AvalancheTensorDataset
 from avalanche.benchmarks.utils.dataset_utils import ClassificationSubset
 from torchvision.transforms import transforms
 
@@ -16,8 +14,7 @@ def _filter_classes_in_single_dataset(dataset, classes):
     for i, c in enumerate(sorted(classes)):
         class_mapping[c] = i
 
-    return avalanche.benchmarks.utils.make_classification_dataset(
-        ClassificationSubset(dataset, indices, class_mapping=class_mapping))
+    return AvalancheDataset(ClassificationSubset(dataset, indices, class_mapping=class_mapping))
 
 
 def filter_classes(train_dataset, test_dataset, classes):
@@ -45,20 +42,17 @@ def balance_dataset(dataset, transform, number_of_samples_per_class=None):
     img_occurrences = defaultdict(lambda: 0)
     X = []
     y = []
-    convert_tensor = transforms.ToTensor()
-
 
     for data in dataset:
         target = data[1]
         if img_occurrences[target] < number_of_samples_per_class:
-            X.append(convert_tensor(data[0]))
+            X.append(data[0])
             y.append(target)
             img_occurrences[target] += 1
 
         if all(i == number_of_samples_per_class for i in img_occurrences): break
 
-    X = torch.stack(X)
-    return make_tensor_classification_dataset(X, targets=y, transform=transform)
+    return AvalancheTensorDataset(X, y, transform=transform)
 
 
 def load_dataset(dataset_loader: Callable[[Optional[Callable]], AvalancheDataset], transform: Optional[Callable],

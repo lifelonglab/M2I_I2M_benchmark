@@ -5,9 +5,7 @@ from avalanche.benchmarks import nc_benchmark
 from avalanche.benchmarks.utils import SupportedDataset
 
 from scenarios.datasets.cifar import load_resized_cifar10
-from scenarios.datasets.emnist_datasets import load_emnist
 from scenarios.datasets.fashion_mnist import load_fashion_mnist_with_resize
-from scenarios.datasets.kmnist import load_kmnist
 from scenarios.datasets.load_imagenet import load_imagenet
 from scenarios.datasets.mnist import load_mnist, load_mnist_with_resize
 from scenarios.datasets.omniglot import load_resized_omniglot
@@ -58,7 +56,7 @@ def _load_datasets(num_class_from_imagenet=200, num_class_from_emnist=26):
     train_imagenet_datasets, test_imagenet_datasets = separate_into_tasks(*load_imagenet(), 10,
                                                                           list(range(num_class_from_imagenet)))
     return test_emnist_datasets, test_fashion, test_imagenet_datasets, test_kmnist, test_mnist, train_emnist_datasets, \
-           train_fashion, train_imagenet_datasets, train_kmnist, train_mnist
+        train_fashion, train_imagenet_datasets, train_kmnist, train_mnist
 
 
 def get_short_mnist_omniglot_fmnist_svhn_cifar10_imagenet(class_incremental: bool, balanced: bool,
@@ -100,7 +98,6 @@ def parse_scenario(args):
     resized = args.resized == 'resized'
     balanced = args.balanced == 'balanced'
     number_of_samples_per_class = args.number_of_samples_per_class
-
 
     if args.scenario == 'short_mnist_omniglot_fmnist_svhn_cifar10_imagenet':
         return get_short_mnist_omniglot_fmnist_svhn_cifar10_imagenet(class_incremental, balanced=balanced,

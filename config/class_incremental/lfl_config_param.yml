@@ -5,14 +5,19 @@ minibatch_size:  128
 lfl_lambda: 1
 
 #model and training params
-model_name: wide_VGG9
-num_classes: 250
+model_name: ResNet
+num_classes: 60
 lr: 0.001
 hs: 250
 epochs: 50
 
 #scenario params
-scenario: imagenet_to_mnist_long
-num_class_from_imagenet: 200
-num_experiences: 5
+scenario: short_mnist_omniglot_fmnist_svhn_cifar10_imagenet
+resized: resized
+balanced: balanced
+number_of_samples_per_class: 500
 scenario_type: class_incremental
+
+
+num_class_from_imagenet: 10
+num_experiences: 5

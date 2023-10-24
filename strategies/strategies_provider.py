@@ -1,15 +1,8 @@
-import torch
-from avalanche.models import IcarlNet, make_icarl_net, initialize_icarl_net
+from avalanche.models.generator import MlpVAE, VAE_loss
 from avalanche.training import SynapticIntelligence, CWRStar, Replay, GDumb, Cumulative, LwF, GEM, AGEM, EWC, CoPE, LFL, \
-    MAS, Naive, GenerativeReplay, ICaRL
+    MAS, Naive, GenerativeReplay, VAETraining, PNNStrategy
+from avalanche.training.plugins import GenerativeReplayPlugin
 from avalanche.training.utils import get_last_fc_layer
-from torch.nn import CrossEntropyLoss
-from torchvision.transforms import Compose, ToTensor, Normalize
-
-icarl_augment_data = Compose([
-    ToTensor(),
-    Normalize(mean=(0.9221,), std=(0.2681,))
-])
 
 
 def parse_strategy_name(args, model, optimizer, criterion, device, eval_plugin):
@@ -54,22 +47,6 @@ def parse_strategy_name(args, model, optimizer, criterion, device, eval_plugin):
             train_mb_size=args.minibatch_size,
             evaluator=eval_plugin,
         )
-    elif args.strategy_name == 'ICaRL':
-        model: IcarlNet = make_icarl_net(num_classes=args.num_classes)
-        model.apply(initialize_icarl_net)
-        return ICaRL(
-            model.feature_extractor,
-            model.classifier,
-            optimizer=optimizer,
-            train_epochs=args.epochs,
-            device=device,
-            train_mb_size=args.minibatch_size,
-            evaluator=eval_plugin,
-            memory_size=args.icarl_mem_size,
-            fixed_memory=True,
-            eval_every=1,
-            buffer_transform=icarl_augment_data,
-        )
     elif args.strategy_name == 'GEM':
         return GEM(
             model=model,
@@ -82,17 +59,15 @@ def parse_strategy_name(args, model, optimizer, criterion, device, eval_plugin):
             evaluator=eval_plugin,
             eval_every=1
         )
-    elif args.strategy_name == 'GenerativeReplay':
-        return GenerativeReplay(
-            model,
-            torch.optim.Adam(model.parameters(), lr=0.001),
-            CrossEntropyLoss(),
-            train_mb_size=100,
-            train_epochs=4,
-            eval_mb_size=100,
-            device=device,
-            evaluator=eval_plugin,
-        )
+    elif args.strategy_name == 'PNN':
+        return PNNStrategy(model,
+                           optimizer,
+                           criterion,
+                           train_epochs=args.epochs,
+                           device=device,
+                           train_mb_size=args.minibatch_size,
+                           evaluator=eval_plugin,
+                           eval_every=1)
     elif args.strategy_name == 'CWRStar':
         return CWRStar(
             model=model,
@@ -197,6 +172,45 @@ def parse_strategy_name(args, model, optimizer, criterion, device, eval_plugin):
             eval_every=1,
             evaluator=eval_plugin,
             device=device,
+        )
+    elif args.strategy_name == 'GenerativeReplay':
+        generator = MlpVAE((3, 64, 64), nhid=16, device=device)
+        # optimzer:
+        lr = 0.01
+        from torch.optim import Adam
+
+        optimizer_generator = Adam(
+            filter(lambda p: p.requires_grad, generator.parameters()),
+            lr=lr,
+            weight_decay=0.0001,
+        )
+        # strategy (with plugin):
+        generator_strategy = VAETraining(
+            model=generator,
+            optimizer=optimizer_generator,
+            criterion=VAE_loss,
+            train_mb_size=args.minibatch_size,
+            train_epochs=16,
+            eval_mb_size=args.minibatch_size,
+            device=device,
+            plugins=[
+                GenerativeReplayPlugin(
+                    replay_size=args.replay_mem_size,
+                    increasing_replay_size=False,
+                )
+            ],
+        )
+        return GenerativeReplay(
+            model=model,
+            optimizer=optimizer,
+            criterion=criterion,
+            train_mb_size=args.minibatch_size,
+            train_epochs=args.epochs,
+            eval_every=1,
+            evaluator=eval_plugin,
+            device=device,
+            replay_size=args.replay_mem_size,
+            generator_strategy=generator_strategy
         )
 
     else:

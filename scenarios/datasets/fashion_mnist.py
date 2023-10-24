@@ -6,14 +6,14 @@ from scenarios.utils import transform_from_gray_to_rgb, load_dataset
 
 train_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     transform_from_gray_to_rgb(),
     Normalize((0.1307,), (0.3081,))
 ])
 
 test_transform_with_resize = Compose([
     ToTensor(),
-    Resize((32, 32)),
+    Resize((64, 64)),
     transform_from_gray_to_rgb(),
     Normalize((0.1307,), (0.3081,))
 ])

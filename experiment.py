@@ -112,7 +112,6 @@ def _configure_parser():
         help="Specify ewc_lambda value.",
     )
 
-
     parser.add_argument(
         "--scenario_type",
         choices=['class_incremental', 'task_incremental'],
@@ -140,13 +139,8 @@ if __name__ == '__main__':
 
     root_path = os.path.abspath(ROOT_PATH)
 
-    if args.strategy_name == 'Replay':
-        out_dir_schema = f'ICCS/{args.scenario_type}/{args.scenario}_{args.balanced}/{args.strategy_name}/' \
-                         f'{args.model_name}_epochs_{args.epochs}_lr_{args.lr}_momentum_{args.momentum}_replay_mem_size' \
-                         f'_{args.replay_mem_size}_{datetime.now().strftime("%d:%m:%Y_%H:%M:%S")}'
-    else:
-        out_dir_schema = f'ICCS/{args.scenario_type}/{args.scenario}_{args.balanced}/{args.strategy_name}/' \
-                         f'{args.model_name}_epochs_{args.epochs}_lr_{args.lr}_momentum_{args.momentum}_{datetime.now().strftime("%d:%m:%Y_%H:%M:%S")}'
+    out_dir_schema = f'out/{args.scenario_type}/{args.scenario}_{args.balanced}/{args.strategy_name}/' \
+                     f'{args.model_name}_epochs_{args.epochs}_lr_{args.lr}_momentum_{args.momentum}_{datetime.now().strftime("%d:%m:%Y_%H:%M:%S")}'
 
     logs_dir = pathlib.Path(f'{os.path.abspath(LOGS_PATH)}/{out_dir_schema}')
     tb_logs_dir = pathlib.Path(f'{root_path}/tb_logs/{out_dir_schema}')

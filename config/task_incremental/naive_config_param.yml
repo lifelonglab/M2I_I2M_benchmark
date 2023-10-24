@@ -4,7 +4,7 @@ patterns_per_exp: 256
 minibatch_size:  128
 
 #model and training params
-model_name: wide_VGG9
+model_name: ResNet
 num_classes: 60
 lr: 0.001
 momentum: 0.9

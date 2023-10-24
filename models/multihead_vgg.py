@@ -50,7 +50,8 @@ class MultiHeadVGG(MultiTaskModule):
         super().__init__()
         self.vgg = VGGSlimNoOutputLayer(config=config, init_weights=init_weights,
                                         classifier_inputdim=classifier_inputdim, classifier_dim1=classifier_dim1,
-                                        classifier_dim2=classifier_dim2, batch_norm=batch_norm, dropout=dropout, img_input_channels=img_input_channels)
+                                        classifier_dim2=classifier_dim2, batch_norm=batch_norm, dropout=dropout,
+                                        img_input_channels=img_input_channels)
         self.classifier = MultiHeadClassifier(classifier_dim2)
 
     def forward_single_task(self, x: torch.Tensor, task_label: int) -> torch.Tensor:

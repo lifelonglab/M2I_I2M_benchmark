@@ -1,12 +1,10 @@
 #stategy params
-strategy_name: GEM
+strategy_name: PNN
 patterns_per_exp: 256
 minibatch_size:  128
-mem_strength: 0.5
-
 
 #model and training params
-model_name: ResNet
+model_name: PNN_34
 num_classes: 60
 lr: 0.001
 momentum: 0.9
@@ -18,8 +16,8 @@ scenario: short_mnist_omniglot_fmnist_svhn_cifar10_imagenet
 resized: resized
 balanced: balanced
 number_of_samples_per_class: 500
-scenario_type: task_incremental
-
+scenario_type: class_incremental
+num_layer: 34
 
 num_class_from_imagenet: 10
 num_experiences: 5

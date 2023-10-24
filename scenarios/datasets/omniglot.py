@@ -1,5 +1,5 @@
 from avalanche.benchmarks.datasets import Omniglot
-from avalanche.benchmarks.utils import AvalancheTensorDataset, make_tensor_classification_dataset
+from avalanche.benchmarks.utils import AvalancheTensorDataset
 from sklearn.model_selection import train_test_split
 from torchvision.transforms import Resize, Compose, ToTensor, RandomCrop, Normalize
 
