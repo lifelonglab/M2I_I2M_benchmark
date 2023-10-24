@@ -56,7 +56,7 @@ def _load_datasets(num_class_from_imagenet=200, num_class_from_emnist=26):
     train_imagenet_datasets, test_imagenet_datasets = separate_into_tasks(*load_imagenet(), 10,
                                                                           list(range(num_class_from_imagenet)))
     return test_emnist_datasets, test_fashion, test_imagenet_datasets, test_kmnist, test_mnist, train_emnist_datasets, \
-           train_fashion, train_imagenet_datasets, train_kmnist, train_mnist
+        train_fashion, train_imagenet_datasets, train_kmnist, train_mnist
 
 
 def get_short_mnist_omniglot_fmnist_svhn_cifar10_imagenet(class_incremental: bool, balanced: bool,
@@ -98,7 +98,6 @@ def parse_scenario(args):
     resized = args.resized == 'resized'
     balanced = args.balanced == 'balanced'
     number_of_samples_per_class = args.number_of_samples_per_class
-
 
     if args.scenario == 'short_mnist_omniglot_fmnist_svhn_cifar10_imagenet':
         return get_short_mnist_omniglot_fmnist_svhn_cifar10_imagenet(class_incremental, balanced=balanced,

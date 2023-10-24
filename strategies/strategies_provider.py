@@ -1,11 +1,8 @@
-import torch
-from avalanche.models import IcarlNet, make_icarl_net, initialize_icarl_net
 from avalanche.models.generator import MlpVAE, VAE_loss
 from avalanche.training import SynapticIntelligence, CWRStar, Replay, GDumb, Cumulative, LwF, GEM, AGEM, EWC, CoPE, LFL, \
-    MAS, Naive, GenerativeReplay, VAETraining, ICaRL, PNNStrategy
+    MAS, Naive, GenerativeReplay, VAETraining, PNNStrategy
 from avalanche.training.plugins import GenerativeReplayPlugin
 from avalanche.training.utils import get_last_fc_layer
-from torch.nn import CrossEntropyLoss
 
 
 def parse_strategy_name(args, model, optimizer, criterion, device, eval_plugin):

@@ -1,16 +1,14 @@
 """
 See: https://github.com/pytorch/vision/blob/master/torchvision/models/vgg.py
 """
-from abc import ABC
 
-import torch.nn as nn
 import torch
+import torch.nn as nn
 import torchvision
-
 #############################
 # Static params: Config
 #############################
-from avalanche.models import MultiHeadClassifier, MultiTaskModule, BaseModel
+from avalanche.models import MultiHeadClassifier, MultiTaskModule
 
 conv_kernel_size = 3
 cfg = {

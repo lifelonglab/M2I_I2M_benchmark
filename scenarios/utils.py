@@ -7,7 +7,6 @@ from avalanche.benchmarks.utils.dataset_utils import ClassificationSubset
 from torchvision.transforms import transforms
 
 
-
 def _filter_classes_in_single_dataset(dataset, classes):
     indices = [i for i, t in enumerate(dataset.targets) if t in classes]
     max_class = max(classes)
@@ -16,7 +15,6 @@ def _filter_classes_in_single_dataset(dataset, classes):
         class_mapping[c] = i
 
     return AvalancheDataset(ClassificationSubset(dataset, indices, class_mapping=class_mapping))
-
 
 
 def filter_classes(train_dataset, test_dataset, classes):

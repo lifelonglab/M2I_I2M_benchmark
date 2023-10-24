@@ -29,6 +29,7 @@ test_transform_with_resize = Compose([
     Normalize((0.1307,), (0.3081,))
 ])
 
+
 def load_mnist(balanced=True, number_of_samples_per_class=None):
     if not balanced:
         train = MNIST(root=f'{DATA_PATH}/data', download=True, train=True, transform=train_transform)

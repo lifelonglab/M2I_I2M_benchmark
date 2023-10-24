@@ -1,11 +1,11 @@
 from torch import nn
 
 
-
 class Cnn(nn.Module):
     """
     Convolutional Neural Network
     """
+
     def __init__(self, num_classes=10):
         super(Cnn, self).__init__()
 

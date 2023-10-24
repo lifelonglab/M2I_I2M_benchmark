@@ -14,12 +14,11 @@ from strategies.strategies_provider import parse_strategy_name
 
 def run_scenario(args, log_dir, tb_log_dir):
     print(f'run strategy: {args.strategy_name}')
-    print(f'run scenario : {args.scenario}' )
+    print(f'run scenario : {args.scenario}')
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print(f'Using device {device}')
     print(f'Using model {args.model_name}')
     model = parse_model_name(args)
-
 
     _save_configs(args, model, log_dir)
 
@@ -65,10 +64,10 @@ def run_scenario(args, log_dir, tb_log_dir):
         print("Computing accuracy on the test set")
         results.append(strategy.eval(scenario.test_stream[:]))
 
-
     all_metrics = eval_plugin.get_all_metrics()
     with open(f'{log_dir}/all_metrics.json', 'w') as f:
         json.dump(all_metrics, f)
+
 
 def _save_configs(args, model, log_dir):
     with open(f'{log_dir}/config.yml', 'w') as f:
